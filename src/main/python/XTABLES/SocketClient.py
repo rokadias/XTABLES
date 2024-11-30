@@ -211,6 +211,7 @@ class SocketClient:
                     self._reconnect()
                     continue
                 buffer += data
+                print(f'buffer: {buffer}')
                 while "\n" in buffer:
                     line, buffer = buffer.split("\n", 1)
 

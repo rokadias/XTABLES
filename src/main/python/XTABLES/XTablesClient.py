@@ -40,7 +40,6 @@ class XTablesClient:
                 self.listener = self.XTablesServiceListener(self)
                 self.browser = ServiceBrowser(self.zeroconf, "_xtables._tcp.local.", self.listener)
                 self.discover_service()
-            self._initialize_client(server_ip=self.server_ip, server_port=self.server_port)
         else:
             self.zeroconf = Zeroconf()
             self.listener = self.XTablesServiceListener(self)
