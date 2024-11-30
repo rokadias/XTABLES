@@ -200,6 +200,8 @@ class SocketClient:
                 self._process_update(message)
 
     def _message_listener(self):
+        self.logger.info("Starting listening to messages.")
+        print(f'self.stop_threads.is_set(): {self.stop_threads.is_set()}')
         buffer = ""
         while not self.stop_threads.is_set():
             if not self.connected:
@@ -253,3 +255,4 @@ class SocketClient:
                 self.logger.fatal("Exception occurred in message listener: " + str(e))
                 self.connected = False
                 self._reconnect()
+        self.logger.info("Stop listening to messages.")
