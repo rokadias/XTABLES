@@ -201,21 +201,21 @@ class SocketClient:
 
     def _message_listener(self):
         self.logger.info("Starting listening to messages.")
-        print(f'self.stop_threads.is_set(): {self.stop_threads.is_set()}')
+        self.logger.info(f'self.stop_threads.is_set(): {self.stop_threads.is_set()}')
         buffer = ""
         while not self.stop_threads.is_set():
             if not self.connected:
-                print(f'Reconnecting: self.connected: {self.connected}')
+                self.logger.info(f'Reconnecting: self.connected: {self.connected}')
                 self._reconnect()
             try:
                 data = self.sock.recv(4096).decode()
                 if not data:
-                    print(f'No data: {data}')
+                    self.logger.info(f'No data: {data}')
                     self.connected = False
                     self._reconnect()
                     continue
                 buffer += data
-                print(f'buffer: {buffer}')
+                self.logger.info(f'buffer: {buffer}')
                 while "\n" in buffer:
                     line, buffer = buffer.split("\n", 1)
 
