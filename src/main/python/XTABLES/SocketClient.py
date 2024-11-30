@@ -203,10 +203,12 @@ class SocketClient:
         buffer = ""
         while not self.stop_threads.is_set():
             if not self.connected:
+                print(f'Reconnecting: self.connected: {self.connected}')
                 self._reconnect()
             try:
                 data = self.sock.recv(4096).decode()
                 if not data:
+                    print(f'No data: {data}')
                     self.connected = False
                     self._reconnect()
                     continue
